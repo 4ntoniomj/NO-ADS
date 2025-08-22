@@ -1,0 +1,16 @@
+services:
+  dnsmasq:
+    container_name: dns_home
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
+      - ./dnsmasq.hosts:/etc/dnsmasq.hosts
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
